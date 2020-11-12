@@ -27,7 +27,7 @@ export default function Sidebar(props) {
         <li>
           <Options done={siteurl} complete={siteurl} todo={"Enter Site URL"} />
           <Options
-            done={csv}
+            done={list.length > 0}
             complete={`Loaded ${list.length} items`}
             todo={"Upload CSV"}
           />
