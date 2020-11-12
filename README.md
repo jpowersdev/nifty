@@ -5,7 +5,8 @@
 3. Authenticate as a user of that site
 4. Begin uploading
 
-### Roadmap
+### Roadmap / Things to Fix
 
 - Failed uploads don't complain. You'll notice an empty space where they print out at the end, but obviously this needs to change.
 - There's no way to control what part of the spreadsheet gets sent, and it requires specific column titles.
+- Currently requires the WP site to have the `JWT Authentication for WP-API` plugin installed.
