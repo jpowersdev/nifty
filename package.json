@@ -1,5 +1,5 @@
 {
-  "name": "nifty",
+  "name": "@niftywp/importer",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -10,9 +10,24 @@
   "dependencies": {
     "moment": "^2.29.1",
     "next": "10.0.1",
+    "normalize.css": "^8.0.1",
+    "rc-progress": "^3.1.1",
     "react": "17.0.1",
     "react-csv-reader": "^3.1.1",
     "react-dom": "17.0.1",
-    "react-hook-form": "^6.11.0"
+    "react-hook-form": "^6.11.0",
+    "react-icons": "^3.11.0",
+    "react-redux": "^7.2.2",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "styled-components": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.56",
+    "@types/react-redux": "^7.1.11",
+    "@types/redux": "^3.6.0",
+    "@types/styled-components": "^5.1.4",
+    "babel-plugin-styled-components": "^1.11.1",
+    "typescript": "^4.0.5"
   }
 }
