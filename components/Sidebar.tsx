@@ -7,7 +7,7 @@ import {
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
-export default function Sidebar(props) {
+export default function Sidebar() {
   const {
     siteurl,
     list,
@@ -17,7 +17,7 @@ export default function Sidebar(props) {
     uploading,
     approved,
   } = useSelector((state: RootState) => state);
-  const { csv } = props;
+
   return (
     <Aside>
       <h1>
@@ -25,27 +25,31 @@ export default function Sidebar(props) {
       </h1>
       <ul>
         <li>
-          <Options done={siteurl} complete={siteurl} todo={"Enter Site URL"} />
           <Options
-            done={list.length > 0}
+            isDone={siteurl}
+            complete={siteurl}
+            todo={"Enter Site URL"}
+          />
+          <Options
+            isDone={list.length > 0}
             complete={`Loaded ${list.length} items`}
             todo={"Upload CSV"}
           />
           <Options
-            done={approved}
+            isDone={approved}
             complete={`Verified ${list.length} items`}
             todo={"Verify Data"}
           />
           <Options
-            done={auth}
-            progress={authenticating}
+            isDone={auth}
+            hasProgress={authenticating}
             step={"Authenticating"}
             complete={`Welcome, ${auth?.user_nicename}`}
             todo={"Authenticate"}
           />
           <Options
-            done={!uploading && done.length > 0}
-            progress={uploading}
+            isDone={!uploading && done.length > 0}
+            hasProgress={uploading}
             step={"Uploading..."}
             complete={`Upload Complete`}
             todo={"Start Upload"}
@@ -56,14 +60,22 @@ export default function Sidebar(props) {
   );
 }
 
-function Options(props) {
+type OptionsProps = {
+  hasProgress?: boolean;
+  isDone: boolean;
+  todo: string;
+  step?: string;
+  complete: string;
+};
+
+function Options(props: OptionsProps) {
   return (
     <>
-      {props.done ? (
+      {props.isDone ? (
         <Option done>
           <AiFillCheckCircle /> {props.complete}
         </Option>
-      ) : props.progress ? (
+      ) : props.hasProgress ? (
         <Option>
           <AiOutlineSync className="spin" /> {props.step}
         </Option>
