@@ -9,6 +9,7 @@ import { initializeStore, RootState } from "../store";
 import Slide from "../components/Slide";
 import { useDispatch, useSelector } from "react-redux";
 import { Line } from "rc-progress";
+import { VscTriangleRight } from "react-icons/vsc";
 
 export default function Home() {
   const { handleSubmit, register } = useForm();
@@ -100,9 +101,7 @@ export default function Home() {
         <title>Importer | NiftyWP</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <Nav>
-        <strong>NiftyWP - Batch Post Importer</strong>
-      </Nav> */}
+
       <Sidebar siteurl={siteurl} csv={list.length > 0} />
 
       <Main>
@@ -110,12 +109,22 @@ export default function Home() {
           <Title>Enter WordPress Site URL</Title>
           <Content>
             <Info>
-              <p>
-                For example: <em>https://website.com</em>
-                <br />
-                or <em>https://multisite.com/site</em>
-              </p>
-              <p>No Trailing Slash</p>
+              <ul>
+                <li>
+                  <VscTriangleRight />
+                  <span>
+                    For Example:
+                    <br />
+                    <em>https://website.com</em>
+                    <br />
+                    <em>https://multisite.com/site</em>
+                  </span>
+                </li>
+                <li>
+                  <VscTriangleRight />
+                  No Trailing Slash
+                </li>
+              </ul>
             </Info>
             <Form onSubmit={handleSubmit(handleSiteUrl)}>
               <input
@@ -133,9 +142,9 @@ export default function Home() {
           <Content>
             <Info>
               <p>
-                <strong>Requirements:</strong>
+                Must contain <code>slug</code>, <code>title</code>,{" "}
+                <code>date</code>, and <code>content</code>.
               </p>
-              <p>Must contain `slug`, `title,` `date`, and `content`.</p>
               <p>All other fields will be ignored.</p>
             </Info>
             <CSVReader
@@ -237,6 +246,23 @@ const Info = styled.div`
     margin: 0.25rem 0;
     font-size: 0.85rem;
   }
+
+  ul {
+    padding-left: 0px;
+    list-style: none;
+
+    li {
+      display: flex;
+      align-items: flex-start;
+      margin: 0.5rem 0;
+
+      svg {
+        font-size: 0.75em;
+        margin-right: 0.75em;
+        margin-top: 1.5%;
+      }
+    }
+  }
 `;
 
 const Title = styled.h2`
@@ -270,7 +296,6 @@ const List = styled.ul<{ small?: boolean }>`
 const Page = styled.div`
   display: grid;
   grid-template-columns: 1fr 5fr;
-  grid-template-rows: 60px auto;
 `;
 
 const Main = styled.main`
@@ -293,13 +318,6 @@ const Form = styled.form`
 
 export function getServerSideProps() {
   const reduxStore = initializeStore();
-  const { dispatch } = reduxStore;
-
-  dispatch({
-    type: "TICK",
-    light: false,
-    lastUpdate: Date.now(),
-  });
 
   return { props: { initialReduxState: reduxStore.getState() } };
 }
