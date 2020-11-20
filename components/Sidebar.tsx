@@ -56,7 +56,9 @@ export default function Sidebar() {
             todo={"Authenticate"}
           />
           <Options
-            isDone={!uploading && done.length > 0}
+            isDone={
+              !uploading && (done.success.length > 0 || done.failure.length > 0)
+            }
             hasProgress={uploading}
             step={"Uploading..."}
             complete={`Upload Complete`}
