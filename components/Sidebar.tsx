@@ -16,6 +16,7 @@ export default function Sidebar() {
     authenticating,
     uploading,
     approved,
+    columnMappings,
   } = useSelector((state: RootState) => state);
 
   return (
@@ -36,9 +37,16 @@ export default function Sidebar() {
             todo={"Upload CSV"}
           />
           <Options
+            isDone={columnMappings}
+            complete={`Assigned ${
+              columnMappings && Object.keys(columnMappings).length
+            } Columns`}
+            todo={"Assign Columns"}
+          />
+          <Options
             isDone={approved}
-            complete={`Verified ${list.length} items`}
-            todo={"Verify Data"}
+            complete={`Approved ${approved?.length} items`}
+            todo={"Select Data"}
           />
           <Options
             isDone={auth}

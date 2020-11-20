@@ -29,13 +29,13 @@ export default function Authenticate() {
       }),
     });
 
-    const { token, user_nicename } = await response.json();
-    if (token) {
+    const { success, data } = await response.json();
+    if (success) {
       dispatch({
         type: "SET_AUTH",
         payload: {
-          token,
-          user_nicename,
+          token: data.token,
+          user_nicename: data.nicename,
         },
       });
     } else {

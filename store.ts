@@ -7,11 +7,15 @@ let store;
 const initialState = {
   siteurl: null,
   list: [],
-  approved: false,
+  approved: null,
   auth: null,
-  done: [],
+  done: {
+    success: [],
+    failure: [],
+  },
   uploading: false,
   authenticating: false,
+  columnMappings: null,
 };
 
 export type RootState = ReturnType<typeof reducer>;
@@ -56,12 +60,26 @@ const reducer = (state = initialState, action) => {
     case "APPROVE_LIST":
       return {
         ...state,
-        approved: true,
+        approved: action.payload,
       };
     case "ADD_DONE":
       return {
         ...state,
-        done: state.done.concat([action.payload]),
+        done:
+          action.payload.status === "success"
+            ? {
+                ...state.done,
+                success: state.done.success.concat(action.payload.record),
+              }
+            : {
+                ...state.done,
+                failure: state.done.failure.concat(action.payload.record),
+              },
+      };
+    case "ASSIGN_COLUMNS":
+      return {
+        ...state,
+        columnMappings: action.payload,
       };
     default:
       return state;
