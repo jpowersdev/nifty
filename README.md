@@ -12,3 +12,5 @@ Use of this tool requires the `JWT Auth` plugin to be installed. Follow the inst
 ### Roadmap / Things to Fix
 
 - Clean up the Results page. Hide success/failure if there are no items in those lists.
+- Keep track of current page using a redux state value, and use redux-thunk or something to move along the path.
+  - This would allow for the tabs on the left site to become clickable navigation items
